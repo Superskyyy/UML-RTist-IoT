@@ -1,0 +1,1031 @@
+[
+    {
+        "id": "d468ea4.368ce18",
+        "type": "tab",
+        "label": "CheckState API",
+        "info": ""
+    },
+    {
+        "id": "ee15f9f7.47a698",
+        "type": "tab",
+        "label": "CheckState Manually",
+        "info": ""
+    },
+    {
+        "id": "ab905f97.fed88",
+        "type": "tab",
+        "label": "End the Demo",
+        "info": ""
+    },
+    {
+        "id": "57053975.2b46f8",
+        "type": "tab",
+        "label": "Fake Pi",
+        "info": ""
+    },
+    {
+        "id": "40c27326.d85b2c",
+        "type": "tab",
+        "label": "From RTist",
+        "info": ""
+    },
+    {
+        "id": "697ed50b.e5c8dc",
+        "type": "tab",
+        "label": "To RTist",
+        "info": ""
+    },
+    {
+        "id": "db654b98.aa51d0",
+        "type": "rt send or invoke",
+        "z": "d468ea4.368ce18",
+        "name": "GetActiveLightOK",
+        "outputs": 1,
+        "hasOut": true,
+        "commandSelect": "invoke",
+        "host": "localhost",
+        "port": "9911",
+        "rport": "lightControl",
+        "portIndex": "",
+        "data": "",
+        "priority": "General",
+        "incoming": 0,
+        "event": "getActiveLight",
+        "x": 212.82861328125,
+        "y": 159.4285888671875,
+        "wires": [
+            [
+                "ebe61e79.6d28fe"
+            ]
+        ]
+    },
+    {
+        "id": "ebe61e79.6d28fe",
+        "type": "http response",
+        "z": "d468ea4.368ce18",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 344.6000061035156,
+        "y": 221.6000213623047,
+        "wires": []
+    },
+    {
+        "id": "e9636e56.77be40",
+        "type": "http in",
+        "z": "d468ea4.368ce18",
+        "name": "CheckState",
+        "url": "/checkstate",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 75,
+        "y": 99.20000457763672,
+        "wires": [
+            [
+                "db654b98.aa51d0"
+            ]
+        ]
+    },
+    {
+        "id": "d4696712.3df51f",
+        "type": "debug",
+        "z": "ee15f9f7.47a698",
+        "name": "Display Current Light",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 422.60003662109375,
+        "y": 187.1999969482422,
+        "wires": []
+    },
+    {
+        "id": "ee706fd1.66bcd5",
+        "type": "rt send or invoke",
+        "z": "ee15f9f7.47a698",
+        "name": "",
+        "outputs": 1,
+        "hasOut": true,
+        "commandSelect": "invoke",
+        "host": "localhost",
+        "port": "9911",
+        "rport": "lightControl",
+        "portIndex": "",
+        "data": "",
+        "priority": "General",
+        "incoming": 0,
+        "event": "getActiveLight",
+        "x": 252.60000610351562,
+        "y": 121.59999084472656,
+        "wires": [
+            [
+                "d4696712.3df51f"
+            ]
+        ]
+    },
+    {
+        "id": "eefba7b9.12aad9",
+        "type": "inject",
+        "z": "ee15f9f7.47a698",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 117,
+        "y": 59.199974060058594,
+        "wires": [
+            [
+                "ee706fd1.66bcd5"
+            ]
+        ]
+    },
+    {
+        "id": "e72298f3.2f8a6c",
+        "type": "inject",
+        "z": "ab905f97.fed88",
+        "name": "",
+        "topic": "#EndTheDemo",
+        "payload": "",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 153.3332977294922,
+        "y": 306.4000549316406,
+        "wires": [
+            [
+                "cbce7e78.19afaa"
+            ]
+        ]
+    },
+    {
+        "id": "cbc0786b.972adc",
+        "type": "http request",
+        "z": "ab905f97.fed88",
+        "name": "ToggleRed",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "http://localhost:1880/togglered",
+        "tls": "",
+        "proxy": "",
+        "authType": "",
+        "x": 577.7332153320312,
+        "y": 261.4567642211914,
+        "wires": [
+            [
+                "eb35d491.fbccff"
+            ]
+        ]
+    },
+    {
+        "id": "cbce7e78.19afaa",
+        "type": "counter-loop",
+        "z": "ab905f97.fed88",
+        "name": "Loop 10 times",
+        "counter": "il7e1b816e9ef074",
+        "counterType": "msg",
+        "reset": false,
+        "resetValue": "value-null",
+        "initial": 0,
+        "initialType": "num",
+        "operator": "lt",
+        "termination": "10",
+        "terminationType": "num",
+        "increment": 1,
+        "incrementType": "num",
+        "x": 487.73321533203125,
+        "y": 181.4567642211914,
+        "wires": [
+            [
+                "957572f6.6d54ed",
+                "e4f1f6ed.dec343"
+            ],
+            [
+                "cbc0786b.972adc"
+            ]
+        ]
+    },
+    {
+        "id": "eb35d491.fbccff",
+        "type": "delay",
+        "z": "ab905f97.fed88",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "100",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 577.7332153320312,
+        "y": 321.4567642211914,
+        "wires": [
+            [
+                "d0e35f39.655647"
+            ]
+        ]
+    },
+    {
+        "id": "d0e35f39.655647",
+        "type": "http request",
+        "z": "ab905f97.fed88",
+        "name": "ToggleYellow",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "http://localhost:1880/toggleyellow",
+        "tls": "",
+        "proxy": "",
+        "authType": "",
+        "x": 587.7332153320312,
+        "y": 381.4567642211914,
+        "wires": [
+            [
+                "e6990d82.1acdf1"
+            ]
+        ]
+    },
+    {
+        "id": "e6990d82.1acdf1",
+        "type": "delay",
+        "z": "ab905f97.fed88",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "100",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 577.7332153320312,
+        "y": 441.4567642211914,
+        "wires": [
+            [
+                "e76e855a.18728e"
+            ]
+        ]
+    },
+    {
+        "id": "e76e855a.18728e",
+        "type": "http request",
+        "z": "ab905f97.fed88",
+        "name": "ToggleGreen",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "http://localhost:1880/togglegreen",
+        "tls": "",
+        "proxy": "",
+        "authType": "",
+        "x": 577.7332153320312,
+        "y": 501.4567642211914,
+        "wires": [
+            [
+                "bb19068b.4a6c89"
+            ]
+        ]
+    },
+    {
+        "id": "bb19068b.4a6c89",
+        "type": "delay",
+        "z": "ab905f97.fed88",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "100",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 577.7332153320312,
+        "y": 561.4567642211914,
+        "wires": [
+            [
+                "cbce7e78.19afaa"
+            ]
+        ]
+    },
+    {
+        "id": "e4f1f6ed.dec343",
+        "type": "http request",
+        "z": "ab905f97.fed88",
+        "name": "Turn All Lights Off",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "http://Models2019_Pi:1880/AllOff",
+        "tls": "",
+        "proxy": "",
+        "authType": "",
+        "x": 784.36181640625,
+        "y": 175.17098999023437,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "957572f6.6d54ed",
+        "type": "function",
+        "z": "ab905f97.fed88",
+        "name": "Configure Tweet - End the Demo",
+        "func": "var d = Date(Date.now());\na = d.toString();\nmsg.payload = \"This demo ended: \" + a;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 2,
+        "x": 802.018798828125,
+        "y": 68.8853530883789,
+        "wires": [
+            [
+                "dd02d6a1.a574eb"
+            ]
+        ]
+    },
+    {
+        "id": "dd02d6a1.a574eb",
+        "type": "twitter out",
+        "z": "ab905f97.fed88",
+        "twitter": "",
+        "name": "Tweet",
+        "x": 1054.51806640625,
+        "y": 67.99999237060547,
+        "wires": []
+    },
+    {
+        "id": "8e9a98fd.603d27",
+        "type": "switch",
+        "z": "ab905f97.fed88",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "#EndTheDemo",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 1,
+        "x": 252.39991760253906,
+        "y": 57.86663818359375,
+        "wires": [
+            [
+                "cbce7e78.19afaa"
+            ]
+        ]
+    },
+    {
+        "id": "d6d7512a.450693",
+        "type": "twitter in",
+        "z": "ab905f97.fed88",
+        "twitter": "",
+        "tags": "#EndTheDemo",
+        "user": "false",
+        "name": "",
+        "inputs": 0,
+        "x": 89.19992065429687,
+        "y": 58.66661834716797,
+        "wires": [
+            [
+                "8e9a98fd.603d27"
+            ]
+        ]
+    },
+    {
+        "id": "eb67dc07.4f58f1",
+        "type": "http in",
+        "z": "57053975.2b46f8",
+        "name": "",
+        "url": "/GreenOn",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 138.29998779296875,
+        "y": 186.19000244140625,
+        "wires": [
+            [
+                "e2e30187.09ca0c"
+            ]
+        ]
+    },
+    {
+        "id": "e2e30187.09ca0c",
+        "type": "http response",
+        "z": "57053975.2b46f8",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 443.49005126953125,
+        "y": 112.22001647949219,
+        "wires": []
+    },
+    {
+        "id": "eadfb072.8cc75f",
+        "type": "http in",
+        "z": "57053975.2b46f8",
+        "name": "",
+        "url": "/YellowOn",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 136,
+        "y": 109.60000610351562,
+        "wires": [
+            [
+                "e2e30187.09ca0c"
+            ]
+        ]
+    },
+    {
+        "id": "ee8f7db4.84f275",
+        "type": "http in",
+        "z": "57053975.2b46f8",
+        "name": "",
+        "url": "/RedOn",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 29.599990844726562,
+        "wires": [
+            [
+                "e2e30187.09ca0c"
+            ]
+        ]
+    },
+    {
+        "id": "e6c4d52e.c2ee19",
+        "type": "http in",
+        "z": "57053975.2b46f8",
+        "name": "",
+        "url": "/AllOff",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 121.99996948242187,
+        "y": 263.9999694824219,
+        "wires": [
+            [
+                "e2e30187.09ca0c"
+            ]
+        ]
+    },
+    {
+        "id": "c3a0858b.09b7ea",
+        "type": "json",
+        "z": "40c27326.d85b2c",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 190.39999389648437,
+        "y": 132.1800079345703,
+        "wires": [
+            [
+                "fc8c0c46.9c98d8"
+            ]
+        ]
+    },
+    {
+        "id": "d32fed49.18f923",
+        "type": "rt receive",
+        "z": "40c27326.d85b2c",
+        "name": "",
+        "port": "9922",
+        "x": 77.50997924804687,
+        "y": 72.62001037597656,
+        "wires": [
+            [
+                "c3a0858b.09b7ea"
+            ]
+        ]
+    },
+    {
+        "id": "efa01d07.f099ec",
+        "type": "rt reply",
+        "z": "40c27326.d85b2c",
+        "name": "",
+        "port": "",
+        "x": 732.6067504882812,
+        "y": 50.84999084472656,
+        "wires": []
+    },
+    {
+        "id": "ede9a015.73ce9e",
+        "type": "rt send or invoke",
+        "z": "697ed50b.e5c8dc",
+        "name": "",
+        "outputs": 1,
+        "hasOut": true,
+        "commandSelect": "send",
+        "host": "localhost",
+        "port": "9911",
+        "rport": "alarmControl",
+        "portIndex": "",
+        "data": "",
+        "priority": "General",
+        "incoming": 0,
+        "event": "",
+        "x": 620.8800659179687,
+        "y": 205.49017333984375,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "eb2044e0.16bde3",
+        "type": "switch",
+        "z": "697ed50b.e5c8dc",
+        "name": "Validate RTist Request",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "ok",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 505.93360900878906,
+        "y": 353.2096252441406,
+        "wires": [
+            [
+                "de5ff420.e8057c"
+            ],
+            [
+                "e5c4216d.2ed3be",
+                "e45110b0.de6e0c"
+            ]
+        ]
+    },
+    {
+        "id": "e5c4216d.2ed3be",
+        "type": "function",
+        "z": "697ed50b.e5c8dc",
+        "name": "Invalid State Change",
+        "func": "var d = Date(Date.now());\na = d.toString();\nmsg.payload = \"Invalid state change requested: \" + a;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 2,
+        "x": 778.3144073486328,
+        "y": 472.48583984375,
+        "wires": [
+            [
+                "d0f53f80.288c21",
+                "de5ff420.e8057c"
+            ]
+        ]
+    },
+    {
+        "id": "de5ff420.e8057c",
+        "type": "http response",
+        "z": "697ed50b.e5c8dc",
+        "name": "HTTPResponse",
+        "statusCode": "",
+        "headers": {},
+        "x": 958.1845245361328,
+        "y": 347.343017578125,
+        "wires": []
+    },
+    {
+        "id": "d0f53f80.288c21",
+        "type": "twitter out",
+        "z": "697ed50b.e5c8dc",
+        "twitter": "",
+        "name": "Tweet",
+        "x": 989.3847198486328,
+        "y": 472.943359375,
+        "wires": []
+    },
+    {
+        "id": "e45110b0.de6e0c",
+        "type": "debug",
+        "z": "697ed50b.e5c8dc",
+        "name": "LogError",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 740.3714752197266,
+        "y": 411.0001525878906,
+        "wires": []
+    },
+    {
+        "id": "d15f0ac4.6e6cf7",
+        "type": "inject",
+        "z": "697ed50b.e5c8dc",
+        "name": "Pause",
+        "topic": "",
+        "payload": "{\"event\" : \"deactivateLight\"}",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 427.7001037597656,
+        "y": 74.41437530517578,
+        "wires": [
+            [
+                "ede9a015.73ce9e"
+            ]
+        ]
+    },
+    {
+        "id": "fc8c0c46.9c98d8",
+        "type": "switch",
+        "z": "40c27326.d85b2c",
+        "name": "",
+        "property": "payload.event",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "fireTriggered",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "sosTriggered",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "trespassingTriggered",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 341.77996826171875,
+        "y": 140.00001525878906,
+        "wires": [
+            [
+                "ca85e378.5cd769"
+            ],
+            [
+                "e7637c60.67cdd"
+            ],
+            [
+                "bd78b2e3.bc6718"
+            ]
+        ]
+    },
+    {
+        "id": "ca85e378.5cd769",
+        "type": "function",
+        "z": "40c27326.d85b2c",
+        "name": "fireTriggered",
+        "func": "//return {payload : \"{}\"} /* empty TCP response */;\nmsg.payload = '{}';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 2,
+        "x": 509.37872314453125,
+        "y": 84.68569946289062,
+        "wires": [
+            [
+                "efa01d07.f099ec",
+                "3ed939eb.1151ea"
+            ]
+        ]
+    },
+    {
+        "id": "497472ab.2f1854",
+        "type": "inject",
+        "z": "697ed50b.e5c8dc",
+        "name": "Fire",
+        "topic": "",
+        "payload": "{\"event\" : \"fire\"}",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 133.26995849609375,
+        "y": 144.32000732421875,
+        "wires": [
+            [
+                "e174da8e.e32dd8"
+            ]
+        ]
+    },
+    {
+        "id": "e174da8e.e32dd8",
+        "type": "function",
+        "z": "697ed50b.e5c8dc",
+        "name": "EventFire",
+        "func": "msg.payload = \"{\\\"event\\\" : \\\"fire\\\"}\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 2,
+        "x": 310.9999694824219,
+        "y": 150.4801025390625,
+        "wires": [
+            [
+                "ede9a015.73ce9e"
+            ]
+        ]
+    },
+    {
+        "id": "7cb71313.a27948",
+        "type": "exec",
+        "z": "697ed50b.e5c8dc",
+        "command": "curl -v -X POST -d \"{\\\"enabled\\\": true}\" https://thingsboard.cloud/api/v1/b8lEDVIoxhMKrAJ8GP8f/telemetry --header \"Content-Type:application/json\"",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "10",
+        "oldrc": false,
+        "name": "StartFakeFire",
+        "x": 952.3799438476562,
+        "y": 155.26998901367187,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "5c9b15d3.13d68",
+        "type": "inject",
+        "z": "697ed50b.e5c8dc",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 754.3800048828125,
+        "y": 86.55998992919922,
+        "wires": [
+            [
+                "7cb71313.a27948"
+            ]
+        ]
+    },
+    {
+        "id": "3ed939eb.1151ea",
+        "type": "exec",
+        "z": "40c27326.d85b2c",
+        "command": "curl -v -X POST -d \"{\\\"enabled\\\": true}\" https://thingsboard.cloud/api/v1/b8lEDVIoxhMKrAJ8GP8f/telemetry --header \"Content-Type:application/json\"",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "10",
+        "oldrc": false,
+        "name": "UpdateDashboardFire",
+        "x": 752.8900756835937,
+        "y": 137.33998107910156,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "3eb251b6.47243a",
+        "type": "exec",
+        "z": "40c27326.d85b2c",
+        "command": "curl -v -X POST -d \"{\\\"enabled\\\": false}\" https://thingsboard.cloud/api/v1/b8lEDVIoxhMKrAJ8GP8f/telemetry --header \"Content-Type:application/json\"",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "10",
+        "oldrc": false,
+        "name": "StartFakeFire",
+        "x": 272.4599609375,
+        "y": 234.67996215820312,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "8180af25.208d",
+        "type": "inject",
+        "z": "40c27326.d85b2c",
+        "name": "",
+        "topic": "",
+        "payload": "Reset",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 80.66006469726562,
+        "y": 220.20999145507812,
+        "wires": [
+            [
+                "3eb251b6.47243a",
+                "4fbf338c.8d2188"
+            ]
+        ]
+    },
+    {
+        "id": "3db6a0ad.7acc5c",
+        "type": "function",
+        "z": "697ed50b.e5c8dc",
+        "name": "EventSOS",
+        "func": "msg.payload = \"{\\\"event\\\" : \\\"sos\\\"}\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 2,
+        "x": 325.38995361328125,
+        "y": 237.19998168945312,
+        "wires": [
+            [
+                "ede9a015.73ce9e"
+            ]
+        ]
+    },
+    {
+        "id": "d8d68793.40e688",
+        "type": "inject",
+        "z": "697ed50b.e5c8dc",
+        "name": "",
+        "topic": "",
+        "payload": "SOS",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 105.3800048828125,
+        "y": 223.43997192382812,
+        "wires": [
+            [
+                "3db6a0ad.7acc5c"
+            ]
+        ]
+    },
+    {
+        "id": "e7637c60.67cdd",
+        "type": "function",
+        "z": "40c27326.d85b2c",
+        "name": "sosTriggered",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "noerr": 2,
+        "x": 516.8298950195312,
+        "y": 227.63003540039062,
+        "wires": [
+            [
+                "efa01d07.f099ec",
+                "fb67b3e6.897a8"
+            ]
+        ]
+    },
+    {
+        "id": "1bcefd9.19e85c2",
+        "type": "exec",
+        "z": "40c27326.d85b2c",
+        "command": "curl -v -X POST -d \"{\\\"triggered\\\": true}\" https://thingsboard.cloud/api/v1/jk1Iperz264sdOjHBoCs/telemetry --header \"Content-Type:application/json\"",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "10",
+        "oldrc": false,
+        "name": "LockWindowI",
+        "x": 782.5999755859375,
+        "y": 322.9400329589844,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "4fbf338c.8d2188",
+        "type": "exec",
+        "z": "40c27326.d85b2c",
+        "command": "curl -v -X POST -d \"{\\\"triggered\\\": false}\" https://thingsboard.cloud/api/v1/jk1Iperz264sdOjHBoCs/telemetry --header \"Content-Type:application/json\"",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "10",
+        "oldrc": false,
+        "name": "LockWindowI",
+        "x": 274.219970703125,
+        "y": 314.67999267578125,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "bd78b2e3.bc6718",
+        "type": "function",
+        "z": "40c27326.d85b2c",
+        "name": "trespassingTriggered",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "noerr": 2,
+        "x": 529.919921875,
+        "y": 343.7599792480469,
+        "wires": [
+            [
+                "1bcefd9.19e85c2"
+            ]
+        ]
+    },
+    {
+        "id": "fb67b3e6.897a8",
+        "type": "exec",
+        "z": "40c27326.d85b2c",
+        "command": "",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "10",
+        "oldrc": false,
+        "name": "",
+        "x": 777.2199096679687,
+        "y": 233.83999633789062,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "db58fb3c.c27388",
+        "type": "exec",
+        "z": "40c27326.d85b2c",
+        "command": "",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "10",
+        "oldrc": false,
+        "name": "",
+        "x": 744.4400024414062,
+        "y": 429.77996826171875,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "c61c4de8.530b9",
+        "type": "function",
+        "z": "697ed50b.e5c8dc",
+        "name": "EventTrespassing",
+        "func": "msg.payload = \"{\\\"event\\\" : \\\"trespassing\\\"}\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 2,
+        "x": 343.1099853515625,
+        "y": 300.5,
+        "wires": [
+            [
+                "ede9a015.73ce9e"
+            ]
+        ]
+    },
+    {
+        "id": "99f5ec8c.e9c388",
+        "type": "inject",
+        "z": "697ed50b.e5c8dc",
+        "name": "",
+        "topic": "",
+        "payload": "Trespassing",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 120,
+        "y": 300.5,
+        "wires": [
+            [
+                "c61c4de8.530b9"
+            ]
+        ]
+    }
+]
